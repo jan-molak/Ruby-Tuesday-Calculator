@@ -8,7 +8,7 @@ describe MyCalc do
     @calc = MyCalc.new
   end
 
-  it "should have a running total of 0, when it's first created" do
+  it "should have a running total of 0 when it's first created" do
     MyCalc.new.running_total.should == 0
   end
 
