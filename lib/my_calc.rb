@@ -15,6 +15,7 @@ class MyCalc
 
     tokens = calculation.to_s.scan(/([\+\-]*\d+)/).flatten.compact.map do | token |
       number = token.scan(/\d+/).flatten.compact[0].to_i
+      # that's a bit of a cheat, but since we only allow + and - operators .. ;-)
       number = -number unless token.count('-') % 2 == 0
       total += number
     end
