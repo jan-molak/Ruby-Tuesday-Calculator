@@ -2,5 +2,5 @@ source :rubygems
 
 group :development, :test do
   gem 'rake'
-  gem 'rspec'
+  gem 'rspec', '>= 2.5.0'
 end
