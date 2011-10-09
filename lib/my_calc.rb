@@ -6,7 +6,25 @@ class MyCalc
   end
 
   def total calculation=0
-    @running_total += calculation
+    raise ArgumentError, 'Please use only digits, + and - in expressions' if calculation =~ /([^\d\+\-\s])/
+
+    # remove everything that's not a number, + or -
+    calculation.to_s.gsub!(/[^\d\+\-]/, '')
+
+    total = 0
+
+    tokens = calculation.to_s.scan(/([\+\-]*\d+)/).flatten.compact.map do | token |
+      number = token.scan(/\d+/).flatten.compact[0].to_i
+      number = -number unless token.count('-') % 2 == 0
+      total += number
+    end
+
+    @running_total += total
+    total
+  end
+
+  def clear
+    @running_total = 0
   end
 
 end
