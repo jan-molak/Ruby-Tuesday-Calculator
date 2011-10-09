@@ -11,6 +11,8 @@ class MyCalc
     # remove everything that's not a number, + or -
     calculation.to_s.gsub!(/[^\d\+\-]/, '')
 
+    raise ArgumentError, 'Using more than two operators per operand doesn\'t really make too much sense, does it? :)' if calculation =~ /([\+\-]{3,})/
+
     total = 0
 
     tokens = calculation.to_s.scan(/([\+\-]*\d+)/).flatten.compact.map do | token |

@@ -29,7 +29,7 @@ describe MyCalc do
     @calc.running_total.should == 0
   end
 
-  it "should compact operators between operands" do
+  it "should superpose operators preceeding each operand" do
     @calc.total('-1 - -2').should == 1
     @calc.total('1 + -2').should  == -1
   end
@@ -40,7 +40,11 @@ describe MyCalc do
 
 
   it "should raise an ArgumentError if provided with rubbish" do
-   lambda{ @calc.total '2 cats + 1 dog ?' }.should raise_error(ArgumentError, "Please use only digits, + and - in expressions")
+   lambda{ @calc.total '2 cats + 1 dog?' }.should raise_error ArgumentError, "Please use only digits, + and - in expressions"
+  end
+
+  it "should raise an ArgumentError if provided with more than two operators per operand" do
+    lambda{ @calc.total '2 - - - 5' }.should raise_error ArgumentError
   end
 
 end
